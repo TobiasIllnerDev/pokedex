@@ -1,0 +1,25 @@
+:root {
+    /* text */
+    --bg-color-pokemon-header-yellow: #FFCB05;
+    --bg-color-pokemon-header-blue:  #2A75BB;
+    --bg-color-pokemon-header-shadow: #1A4A8A;
+    /* Pokeball color */
+    --bg-color-pokeball-red: #EE1515;
+    --bg-color-pokeball-white: #FFFFFF;
+    --bg-color-pokeball-black: #222224;
+    --bg-color-pokeball-grey: #D3D3D3;
+    /* Games color */
+    --bg-color-game-blue: #2A75BB;
+    --bg-color-game-red: #CC0000;
+    --bg-color-game-yellow: #FFCB05;
+    --bg-color-game-gold: #D4AF37;
+    --bg-color-game-silver: #C0C0C0;
+    --bg-color-game-rubin: #9B111E;
+    --bg-color-game-saphir: #0F52BA;
+    --bg-color-game-smaragd: #50C878;
+    --bg-color-game-diamant: #7FD8FF;
+    --bg-color-game-pearl: #E6CFE6;
+    --bg-color-game-platin: #B0B0B0;
+    --bg-color-game-black: #1A1A1A;
+    --bg-color-game-white: #F5F5F5;
+}
