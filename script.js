@@ -1,7 +1,7 @@
 const MAX_POKEMON = 151;
 const listWrapper = document.querySelector(".list-wrapper");
 const searchInput = document.querySelector("#search-input");
-const numberFilter = document.querySelector("#numbert");
+const numberFilter = document.querySelector("#number");
 const nameFilter = document.querySelector("#name");
 const notFoundMessage = document.querySelector("#not-found-message");
 
@@ -56,4 +56,42 @@ function displayPokemons(pokemon) {
         });
         listWrapper.appendChild(listItem);
     });
+}
+
+searchInput.addEventListener("keyup", handleSearch);
+
+function handleSearch() {
+    const searchTerm = searchInput.value.toLowerCase();
+    let filteredPokemons;
+
+    if(numberFilter.checked) {
+        filteredPokemons = allPokemons.filter((pokemon) => {
+            const pokemonID = pokemon.url.split("/")[6];
+            return pokemonID.startsWith(searchTerm);
+        });
+    } else if (nameFilter.checked) {
+        filteredPokemons = allPokemons.filter((pokemon) => 
+        pokemon.name.toLowerCase().startsWith(searchTerm) 
+        );
+    } else {
+        filteredPokemons = allPokemons;
+    }
+
+    displayPokemons(filteredPokemons);
+
+    if(filteredPokemons.length === 0) {
+        notFoundMessage.style.display = "block";
+    }
+    else {
+        notFoundMessage.style.display = "none";
+    }
+}
+
+const closeButton = document.querySelector(".search-close-icon");
+closeButton.addEventListener("click", clearSearch);
+
+function clearSearch() {
+    searchInput.value = "";
+    displayPokemons(allPokemons);
+    notFoundMessage.style.display = "none";
 }
