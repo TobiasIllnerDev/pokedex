@@ -277,3 +277,20 @@ body {
     transform: scale(1.05);
     opacity: 0.9;
 }
+
+.pokemon-types-container {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-top: 6px;
+}
+
+.type-badge {
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 8px;
+    text-transform: capitalize;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}

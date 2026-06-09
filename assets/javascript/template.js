@@ -18,6 +18,6 @@ function showPokemonTemplate(pokemon, pokemonID) {
 function showPokemonTypes(pokemon, pokeTypes) {
     return `
         <div class="types">
-            <p>
+            <p c>
     `
 }
