@@ -4,74 +4,39 @@ const searchInput = document.getElementById("search-input");
 const numberFilter = document.getElementById("number");
 const nameFilter = document.getElementById("name");
 const notFoundMessage = document.getElementById("not-found-message");
+const typeFilter = document.getElementById("typ-wrap");
 
 let allPokemons = [];
+
+// fetch(`https://pokeapi.co/api/v2/pokemon/${id}`),
+// fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
 
 async function loadPokemons() {
     try {
         const response = await fetch(
             `https://pokeapi.co/api/v2/pokemon?limit=${MAX_POKEMON}`
+
         );
-
         const data = await response.json();
-
         allPokemons = data.results;
         displayPokemons(allPokemons);
-
     } catch (error) {
         console.error("Fehler beim Laden der Pokémon:", error);
+
     }
-}
 
-async function fetchPokemonDataBeforeRedirect(id) {
-    try {
-        const [pokemonResponse, speciesResponse] = await Promise.all([
-            fetch(`https://pokeapi.co/api/v2/pokemon/${id}`),
-            fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
-        ]);
-
-        const pokemon = await pokemonResponse.json();
-        const pokemonSpecies = await speciesResponse.json();
-
-        return {
-            pokemon,
-            pokemonSpecies
-        };
-
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
 }
 
 function displayPokemons(pokemons) {
-    listWrapper.innerHTML = "";
-    let htmlContent = "";
+    let htmlContent = "" 
 
-    pokemons.forEach((pokemon) => {
+    pokemons.forEach(pokemon => {
         const pokemonID = pokemon.url.split("/")[6];
-        htmlContent += showPokemonTemplate(pokemon, pokemonID);
+        htmlContent += showPokemonTemplate(pokemon, pokemonID)
     });
 
     listWrapper.innerHTML = htmlContent;
 }
-
-
-async function handlePokemonClick(id) {
-    const data = await fetchPokemonDataBeforeRedirect(id);
-    
-    if (data) {
-        console.log("Daten erfolgreich an handlePokemonClick übergeben!", data);
-    }
-}
-
-const sortIcon = document.getElementById("sort-icon");
-const filterWrapper = document.querySelector(".filter-wrapper");
-
-filterWrapper.classList.add("hidden");
-sortIcon.addEventListener("click", () => {
-    filterWrapper.classList.toggle("hidden");
-});
 
 const colours = {
 	normal: '#A8A77A',
@@ -93,4 +58,5 @@ const colours = {
 	steel: '#B7B7CE',
 	fairy: '#D685AD',
 };
+
 loadPokemons();
