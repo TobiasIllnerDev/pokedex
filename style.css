@@ -179,7 +179,7 @@ body {
 .list-wrapper {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-auto-rows: minmax(300px, auto); 
+    grid-auto-rows: minmax(350px, auto); 
     gap: 16px;
     justify-content: center;
 }
@@ -209,8 +209,9 @@ body {
 
 .list-item .caption-fonts {
     margin: 0;
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     color: var(--bg-color-pokeball-black);
+    font-family: 'Pokemon Solid';
 }
 
 .list-item .img-wrap {
@@ -232,15 +233,17 @@ body {
     background-color: var(--bg-color-game-white);
     width: 100%;
     text-align: center;
-    padding: 30px 0;
+    padding: 20px 0;
     border-top: 1px solid var(--bg-color-pokeball-grey);
 }
 
 .list-item .body3-fonts {
     margin: 0;
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: var(--bg-color-pokeball-black);
     text-transform: capitalize;
+    font-family: 'Pokemon Solid';
+    font-weight: 500;
 }
 
 #not-found-message {
@@ -286,9 +289,14 @@ body {
     margin-top: 6px;
 }
 
+.typ-wrap {
+    display: flex;
+    gap: 5px;
+}
+
 .type-badge {
     color: white;
-    font-size: 0.75rem;
+    font-size: 1rem;
     font-weight: bold;
     padding: 2px 8px;
     border-radius: 8px;
