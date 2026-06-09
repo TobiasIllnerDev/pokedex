@@ -15,9 +15,10 @@ function showPokemonTemplate(pokemon, pokemonID) {
     `;
 }
 
-function showPokemonTypes(pokemon, pokeTypes) {
+function showPokemonTypes(typeName) {
     return `
-        <div class="types">
-            <p c>
-    `
+        <span class="type-badge" style="background-color: ${colours[typeName]}">
+            ${typeName}
+        </span>
+    `;
 }

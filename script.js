@@ -8,45 +8,67 @@ const typeFilter = document.getElementById("typ-wrap");
 const loadMoreBtn = document.getElementById("load-more-btn");
 
 let allPokemons = [];
-let allPokemonMoreDetails = [];
 let currentDisplayedCount = 20;
-
-// fetch(`https://pokeapi.co/api/v2/pokemon/${id}`),
-// fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
 
 async function loadPokemons() {
     try {
         const response = await fetch(
             `https://pokeapi.co/api/v2/pokemon?limit=${MAX_POKEMON}`
-
         );
         const data = await response.json();
         allPokemons = data.results;
         displayPokemons(allPokemons.slice(0, currentDisplayedCount));
-        console.log(allPokemons[0])
     } catch (error) {
         console.error("Fehler beim Laden der Pokémon:", error);
-
     }
 }
 
 function displayPokemons(pokemons) {
-    let htmlContent = "" 
+    let htmlContent = ""; 
 
     pokemons.forEach(pokemon => {
         const pokemonID = pokemon.url.split("/")[6];
-        htmlContent += showPokemonTemplate(pokemon, pokemonID)
+        htmlContent += showPokemonTemplate(pokemon, pokemonID);
     });
 
     listWrapper.innerHTML = htmlContent;
+
+    const renderedItems = listWrapper.getElementsByClassName("list-item");
+
+    pokemons.forEach((pokemon, i) => {
+        const pokemonID = pokemon.url.split("/")[6];
+        loadPokemonsDetails(pokemonID, renderedItems[i]);
+    });
+}
+
+async function loadPokemonsDetails(id, cardElement) {
+    try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        const data = await response.json();
+        
+        if (cardElement && data.types) {
+            const targetDiv = cardElement.querySelector(".typ-wrap");
+            
+            if (targetDiv) {
+                let typesHTML = "";
+                
+                
+                for (let i = 0; i < data.types.length; i++) {
+                    const typeName = data.types[i].type.name;
+                    typesHTML += showPokemonTypes(typeName);
+                }
+                
+                
+                targetDiv.innerHTML = typesHTML;
+            }
+        }
+    } catch (error) {
+        console.error("Fehler beim Laden der Pokémon-Details:", error);
+    }
 }
 
 function loadMorePokemons() {
-    if (currentDisplayedCount === 20) {
-        currentDisplayedCount += 40;
-    } else {
-        currentDisplayedCount += 40;
-    }
+    currentDisplayedCount += 40;
 
     if (currentDisplayedCount >= MAX_POKEMON) {
         currentDisplayedCount = MAX_POKEMON;
@@ -57,7 +79,7 @@ function loadMorePokemons() {
     displayPokemons(pokemonsToDisplay);
 }
 
-
+loadMoreBtn.addEventListener("click", loadMorePokemons);
 
 const colours = {
     normal: '#A8A77A', fire: '#EE8130', water: '#6390F0', electric: '#F7D02C',
