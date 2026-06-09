@@ -19,6 +19,7 @@
       rel="stylesheet"
     />
 
+    <script src="./assets/javascript/template.js"></script>
     <script src="./script.js" defer></script>
   </head>
   <body>
@@ -75,14 +76,31 @@
               </div>
             </div>
           </div>
+          <div class="btn-genarations">
+            <button></button><button></button><button></button><button></button
+            ><button></button>
+          </div>
         </section>
       </header>
 
       <section class="pokemon-list">
         <div class="container">
-          <div class="list-wrapper"></div>
+          <div class="list-wrapper" id="list-wrapper"></div>
         </div>
         <div id="not-found-message">Pokemon not found</div>
+
+        <div id="pokemon-dialog" class="dialog hidden">
+          <div class="dialog-content">
+            <span id="close-dialog">✖</span>
+
+            <h2 id="pokemon-name"></h2>
+
+            <img id="pokemon-image" />
+
+            <p id="pokemon-height"></p>
+            <p id="pokemon-weight"></p>
+          </div>
+        </div>
       </section>
     </main>
   </body>
