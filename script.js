@@ -44,21 +44,15 @@ function displayPokemons(pokemons) {
 async function loadPokemonsDetails(id, cardElement) {
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-        const data = await response.json();
-        
+        const data = await response.json();    
         if (cardElement && data.types) {
-            const targetDiv = cardElement.querySelector(".typ-wrap");
-            
+            const targetDiv = cardElement.querySelector(".typ-wrap");         
             if (targetDiv) {
-                let typesHTML = "";
-                
-                
+                let typesHTML = "";       
                 for (let i = 0; i < data.types.length; i++) {
                     const typeName = data.types[i].type.name;
                     typesHTML += showPokemonTypes(typeName);
                 }
-                
-                
                 targetDiv.innerHTML = typesHTML;
             }
         }

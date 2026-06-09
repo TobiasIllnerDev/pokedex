@@ -76,6 +76,7 @@ body {
     width: 20px;
     height: 20px;
     opacity: 0.5;
+    cursor: pointer;
 }
 
 .search-close-icon {
@@ -293,4 +294,75 @@ body {
     border-radius: 8px;
     text-transform: capitalize;
     box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.btn-genarations {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+.btn-genarations > button {
+    width: 100px;
+    height: 30px;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.gen1 {
+    color: white;
+    text-shadow:
+        1px 1px 0 black,
+        -1px 1px 0 black,
+        1px -1px 0 black,
+        1px -1px 0 black;
+    border: 1px solid black;
+    background-image: linear-gradient(to right, var(--bg-color-game-blue) , var(--bg-color-game-red), var(--bg-color-game-yellow));
+}
+
+.gen2 {
+    color: black;
+    text-shadow:
+        1px 1px 0 white,
+        -1px 1px 0 white,
+        1px -1px 0 white,
+        1px -1px 0 white;
+    border: 1px solid black;
+    background-image: linear-gradient(to right, var(--bg-color-game-gold) , var(--bg-color-game-silver), var(--bg-color-game-crystal));
+}
+
+.gen3 {
+    color: white;
+    text-shadow:
+        1px 1px 0 black,
+        -1px 1px 0 black,
+        1px -1px 0 black,
+        1px -1px 0 black;
+    border: 1px solid black;
+    background-image: linear-gradient(to right, var(--bg-color-game-rubin) , var(--bg-color-game-saphir), var(--bg-color-game-smaragd));
+}
+
+.gen4 {
+    color: black;
+    text-shadow:
+        1px 1px 0 white,
+        -1px 1px 0 white,
+        1px -1px 0 white,
+        1px -1px 0 white;
+    border: 1px solid black;
+    background-image: linear-gradient(to right, var(--bg-color-game-diamant) , var(--bg-color-game-pearl), var(--bg-color-game-platin));
+}
+
+.gen5 {
+    color: white;
+    text-shadow:
+        1px 1px 0 black,
+        -1px 1px 0 black,
+        1px -1px 0 black,
+        1px -1px 0 black;
+    border: 1px solid black;
+    background-image: linear-gradient(to right, var(--bg-color-game-black) , var(--bg-color-game-white));
 }
