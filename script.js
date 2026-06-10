@@ -9,6 +9,7 @@ const loadMoreBtn = document.getElementById("load-more-btn");
 const detailDialog = document.getElementById("pokemon-detail-dialog");
 const dialogContent = document.getElementById("dialog-content");
 const closeDialogBtn = document.getElementById("close-dialog-btn");
+const notFoundText = document.getElementById("not-found-message-text");
 
 let allPokemons = [];
 let currentDisplayedCount = 20;
@@ -84,6 +85,7 @@ function handleSearch() {
         displayPokemons(allPokemons.slice(0, currentDisplayedCount));
         notFoundMessage.classList.add("hidden");
         loadMoreBtn.classList.remove("hidden");
+        notFoundText.classList.add("hidden")
         return;
     }
 
@@ -99,11 +101,17 @@ function handleSearch() {
 
     if (nameFilter.checked) {
         if (searchTerm.length < 3) {
+            notFoundText.classList.remove("hidden");
             return;
         }
+        else {
+            notFoundText.classList.add("hidden");
+        }
         loadMoreBtn.classList.add("hidden");
+        notFoundText.classList.add("hidden");
         filteredPokemons = allPokemons.filter((pokemon) =>
             pokemon.name.toLowerCase().includes(searchTerm)
+        
         );
     }
 
@@ -144,7 +152,7 @@ async function handlePokemonClick(pokemonID) {
         } else {
             backgroundStyle = `background-color: ${color1};`;
             bgImagesHTML = `
-                <img src="./assets/icons/${type1}.svg" class="bg-type-icon icon-single" alt="" />
+                <img src="./assets/pokemon-icons/${type1}.png" class="bg-type-icon icon-single" alt="" />
             `;
         }
 

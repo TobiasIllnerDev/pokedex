@@ -211,7 +211,7 @@ body {
     margin: 0;
     font-size: 1.3rem;
     color: var(--bg-color-pokeball-black);
-    font-family: 'Pokemon Solid';
+    font-family: 'Fredoka';
 }
 
 .list-item .img-wrap {
@@ -242,7 +242,7 @@ body {
     font-size: 1.5rem;
     color: var(--bg-color-pokeball-black);
     text-transform: capitalize;
-    font-family: 'Pokemon Solid';
+    font-family: 'Fredoka';
     font-weight: 500;
 }
 
@@ -403,6 +403,11 @@ dialog::backdrop {
     z-index: 1;
 }
 
+.dialog-typ-wrap {
+    display: flex;
+    gap: 15px;
+}
+
 .dialog-header {
     display: flex;
     flex-direction: column;
@@ -498,10 +503,10 @@ dialog::backdrop {
 
 .bg-type-icon {
     position: absolute;
-    bottom: -20px;
+    bottom: 320px;
     width: 140px;
     height: 140px;
-    opacity: 0.15; 
+    opacity: 0.45; 
     pointer-events: none; 
     z-index: -1; 
 }
@@ -518,7 +523,7 @@ dialog::backdrop {
 
 .icon-single {
     right: -20px;
-    bottom: -20px;
+    bottom: 320px;
     width: 180px;
     height: 180px;
     transform: rotate(10deg);
@@ -566,5 +571,19 @@ dialog::backdrop {
     color: #f7d02c;
     text-shadow: 1.5px 1.5px 0 #3c5aa6;
     margin: 10px 0;
+    text-transform: capitalize;
+}
+
+.not-found-message-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.not-found-message-text {
+    font-family: 'Fredoka';
+    color: #f7d02c;
+    text-shadow: 1.5px 1.5px 0 #3c5aa6;
     text-transform: capitalize;
 }
