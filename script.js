@@ -73,8 +73,46 @@ async function loadPokemonsDetails(id, cardElement) {
     }
 }
 
+function handleSearch() {
+    const searchTerm = searchInput.value.trim().toLowerCase();
+
+    if (searchTerm === "") {
+        
+        displayPokemons(allPokemons.slice(0, currentDisplayedCount));
+        notFoundMessage.classList.add("hidden");
+        return;
+    }
+
+    let filteredPokemons = [];
+
+    if (numberFilter.checked) {
+        filteredPokemons = allPokemons.filter((pokemon) => {
+            const pokemonID = pokemon.url.split("/")[6];
+            return pokemonID.startsWith(searchTerm);
+        });
+    }
+
+    if (nameFilter.checked) {
+        if (searchTerm.length < 3) {
+            return;
+        }
+
+        filteredPokemons = allPokemons.filter((pokemon) =>
+            pokemon.name.toLowerCase().includes(searchTerm)
+        );
+    }
+
+    displayPokemons(filteredPokemons);
+
+    if (filteredPokemons.length === 0) {
+        notFoundMessage.classList.remove("hidden");
+    } else {
+        notFoundMessage.classList.add("hidden");
+    }
+}
+
 function loadMorePokemons() {
-    currentDisplayedCount += 40;
+    currentDisplayedCount += 20;
 
     if (currentDisplayedCount >= allPokemons.length) {
         currentDisplayedCount = allPokemons.length;
@@ -93,7 +131,16 @@ function changeGeneration(genNumber) {
     if (genNumber === 5) loadPokemons(494, 649);
 }
 
+const closeButton = document.getElementById("search-close-icon");
+
+closeButton.addEventListener("click", () => {
+    searchInput.value = "";
+    displayPokemons(allPokemons.slice(0, currentDisplayedCount));
+    notFoundMessage.classList.add("hidden");
+});
+
 loadMoreBtn.addEventListener("click", loadMorePokemons);
+searchInput.addEventListener("input", handleSearch);
 
 const colours = {
     normal: '#A8A77A', fire: '#EE8130', water: '#6390F0', electric: '#F7D02C',
