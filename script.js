@@ -10,13 +10,25 @@ const loadMoreBtn = document.getElementById("load-more-btn");
 let allPokemons = [];
 let currentDisplayedCount = 20;
 
-async function loadPokemons() {
+let currentStartId = 1;
+let currentEndId = 151;
+
+async function loadPokemons(startId = 1, endId = 151) {
+    currentStartId = startId;
+    currentEndId = endId;
+    currentDisplayedCount = 20;
+
+    const limit = endId - startId + 1;
+    const offset = startId - 1;
+
     try {
         const response = await fetch(
-            `https://pokeapi.co/api/v2/pokemon?limit=${MAX_POKEMON}`
+            `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
         );
         const data = await response.json();
         allPokemons = data.results;
+        loadMoreBtn.classList.remove("hidden");
+
         displayPokemons(allPokemons.slice(0, currentDisplayedCount));
     } catch (error) {
         console.error("Fehler beim Laden der Pokémon:", error);
@@ -64,13 +76,21 @@ async function loadPokemonsDetails(id, cardElement) {
 function loadMorePokemons() {
     currentDisplayedCount += 40;
 
-    if (currentDisplayedCount >= MAX_POKEMON) {
-        currentDisplayedCount = MAX_POKEMON;
+    if (currentDisplayedCount >= allPokemons.length) {
+        currentDisplayedCount = allPokemons.length;
         loadMoreBtn.classList.add("hidden");
     }
 
     const pokemonsToDisplay = allPokemons.slice(0, currentDisplayedCount);
     displayPokemons(pokemonsToDisplay);
+}
+
+function changeGeneration(genNumber) {
+    if (genNumber === 1) loadPokemons(1, 151);
+    if (genNumber === 2) loadPokemons(152, 251);
+    if (genNumber === 3) loadPokemons(252, 386);
+    if (genNumber === 4) loadPokemons(387, 493);
+    if (genNumber === 5) loadPokemons(494, 649);
 }
 
 loadMoreBtn.addEventListener("click", loadMorePokemons);
@@ -83,4 +103,4 @@ const colours = {
     steel: '#B7B7CE', fairy: '#D685AD',
 };
 
-loadPokemons();
+loadPokemons(1, 151);
