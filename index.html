@@ -64,12 +64,17 @@
                       id="number"
                       name="filters"
                       value="number"
-                      checked
                     />
                     <label for="number" class="body3-fonts">Number</label>
                   </div>
                   <div>
-                    <input type="radio" id="name" name="filters" value="name" />
+                    <input
+                      type="radio"
+                      id="name"
+                      name="filters"
+                      value="name"
+                      checked
+                    />
                     <label for="name" class="body3-fonts">Name</label>
                   </div>
                 </div>
@@ -101,18 +106,10 @@
         </div>
         <div id="not-found-message" class="hidden">Pokemon not found</div>
 
-        <div id="pokemon-dialog" class="dialog hidden">
-          <div class="dialog-content">
-            <span id="close-dialog">✖</span>
-
-            <h2 id="pokemon-name"></h2>
-
-            <img id="pokemon-image" />
-
-            <p id="pokemon-height"></p>
-            <p id="pokemon-weight"></p>
-          </div>
-        </div>
+        <dialog id="pokemon-detail-dialog">
+          <button id="close-dialog-btn">&times;</button>
+          <div id="dialog-content"></div>
+        </dialog>
       </section>
     </main>
   </body>

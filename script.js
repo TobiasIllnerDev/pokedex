@@ -77,9 +77,9 @@ function handleSearch() {
     const searchTerm = searchInput.value.trim().toLowerCase();
 
     if (searchTerm === "") {
-        
         displayPokemons(allPokemons.slice(0, currentDisplayedCount));
         notFoundMessage.classList.add("hidden");
+        loadMoreBtn.classList.remove("hidden");
         return;
     }
 
@@ -88,6 +88,7 @@ function handleSearch() {
     if (numberFilter.checked) {
         filteredPokemons = allPokemons.filter((pokemon) => {
             const pokemonID = pokemon.url.split("/")[6];
+            loadMoreBtn.classList.add("hidden");
             return pokemonID.startsWith(searchTerm);
         });
     }
@@ -96,7 +97,7 @@ function handleSearch() {
         if (searchTerm.length < 3) {
             return;
         }
-
+        loadMoreBtn.classList.add("hidden");
         filteredPokemons = allPokemons.filter((pokemon) =>
             pokemon.name.toLowerCase().includes(searchTerm)
         );
@@ -136,6 +137,7 @@ const closeButton = document.getElementById("search-close-icon");
 closeButton.addEventListener("click", () => {
     searchInput.value = "";
     displayPokemons(allPokemons.slice(0, currentDisplayedCount));
+    loadMoreBtn.classList.remove("hidden");
     notFoundMessage.classList.add("hidden");
 });
 
