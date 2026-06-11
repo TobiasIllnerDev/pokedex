@@ -209,6 +209,9 @@ body {
 
 .list-item:hover {
     transform: translateY(-4px);
+    box-shadow: 
+        0 4px 10px var(--type-color, rgba(0, 0, 0, 0.2)),  
+        0 12px 28px var(--type-color, rgba(0, 0, 0, 0.15));
 }
 
 .list-item .number-wrap {

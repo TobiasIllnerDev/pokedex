@@ -76,7 +76,12 @@ function fetchRenderedDetails(pokemons, startIndex, renderedItems) {
 
 async function displayPokemons(pokemons, append = false) {
     const html = generatePokemonsHTML(pokemons);
-    listWrapper.innerHTML = append ? (listWrapper.innerHTML + html) : html;
+    
+    if (append) {
+        listWrapper.insertAdjacentHTML("beforeend", html);
+    } else {
+        listWrapper.innerHTML = html;
+    }
     
     const items = listWrapper.getElementsByClassName("list-item");
     const startIndex = append ? items.length - pokemons.length : 0;
@@ -96,6 +101,8 @@ async function loadPokemonsDetails(id, cardElement) {
         
         if (targetDiv && data.types) {
             targetDiv.innerHTML = generateTypesHTML(data.types);
+
+            cardElement.style.setProperty('--type-color', `${colours[data.types[0].type.name]}AA`);
         }
     } catch (error) {
         console.error("Fehler beim Laden der Pokémon-Details:", error);
