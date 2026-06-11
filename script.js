@@ -140,7 +140,7 @@ function handleSearch() {
 
     const filtered = getFilteredPokemons(searchTerm);
     if (filtered === null) {
-        resetSearchUI();
+        if (loadMoreBtn.classList.contains("hidden")) resetSearchUI();
         notFoundText.classList.remove("hidden");
         return;
     }
@@ -298,15 +298,25 @@ function changeGeneration(genNumber) {
     if (genNumber === 5) loadPokemons(494, 649);
 }
 
+function getActivePokemonList() {
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    if (searchTerm !== "" && searchTerm.length >= 3) {
+        return getFilteredPokemons(searchTerm) || [];
+    }
+    return allPokemons;
+}
+
 function getNeighbourId(direction) {
-    const currentId = currentOpenedPokemon.id;
-    if (direction === "next") {
-        return currentId >= currentEndId ? currentStartId : currentId + 1;
-    }
-    if (direction === "prev") {
-        return currentId <= currentStartId ? currentEndId : currentId - 1;
-    }
-    return currentId;
+    const list = getActivePokemonList();
+    const currentIndex = list.findIndex(p => p.url.split("/")[6] == currentOpenedPokemon.id);
+    if (currentIndex === -1) return currentOpenedPokemon.id;
+
+    let nextIndex = direction === "next" ? currentIndex + 1 : currentIndex - 1;
+    
+    if (nextIndex >= list.length) nextIndex = 0;
+    if (nextIndex < 0) nextIndex = list.length - 1;
+
+    return list[nextIndex].url.split("/")[6];
 }
 
 async function navigatePokemon(direction) {
