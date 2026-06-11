@@ -18,13 +18,16 @@ let currentOpenedPokemon = null;
 let currentStartId = 1;
 let currentEndId = 151;
 
+
 function showLoader() {
     document.getElementById("loading").classList.remove("hidden");
 }
 
+
 function hideLoader() {
     document.getElementById("loading").classList.add("hidden");
 }
+
 
 async function loadPokemons(startId = 1, endId = 151) {
     currentStartId = startId;
@@ -51,6 +54,7 @@ async function loadPokemons(startId = 1, endId = 151) {
     }
 }
 
+
 async function displayPokemons(pokemons, append = false) {
     let htmlContent = ""; 
 
@@ -76,6 +80,8 @@ async function displayPokemons(pokemons, append = false) {
 
     return Promise.all(detailPromises);
 }
+
+
 async function loadPokemonsDetails(id, cardElement) {
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -95,6 +101,7 @@ async function loadPokemonsDetails(id, cardElement) {
         console.error("Fehler beim Laden der Pokémon-Details:", error);
     }
 }
+
 
 function handleSearch() {
     const searchTerm = searchInput.value.trim().toLowerCase();
@@ -142,6 +149,7 @@ function handleSearch() {
     }
 }
 
+
 async function handlePokemonClick(pokemonID) {
     showLoader();
     try {
@@ -185,6 +193,7 @@ async function handlePokemonClick(pokemonID) {
     }
 }
 
+
 function renderInfosTab() {
     const container = document.getElementById("tab-content-container");
     const height = currentOpenedPokemon.height / 10;
@@ -197,6 +206,7 @@ function renderInfosTab() {
 
     container.innerHTML = showDialogInfoTemplate(height, weight, currentOpenedPokemon.base_experience, abilitiesHTML.join(", "));
 }
+
 
 function renderStatsTab() {
     const container = document.getElementById("tab-content-container");
@@ -214,6 +224,7 @@ function renderStatsTab() {
     statsHTML += '</div>';
     container.innerHTML = statsHTML;
 }
+
 
 async function renderEvoTab() {
     const container = document.getElementById("tab-content-container");
@@ -246,6 +257,7 @@ async function renderEvoTab() {
     }
 }
 
+
 function switchTab(tabName) {
 
     const buttons = document.querySelectorAll(".tab-btn");
@@ -262,6 +274,7 @@ closeDialogBtn.addEventListener("click", () => detailDialog.close());
 detailDialog.addEventListener("click", (e) => {
     if (e.target === detailDialog) detailDialog.close();
 });
+
 
 async function loadMorePokemons() {
     showLoader(); 
@@ -282,6 +295,7 @@ async function loadMorePokemons() {
     }
 }
 
+
 function changeGeneration(genNumber) {
     if (genNumber === 1) loadPokemons(1, 151);
     if (genNumber === 2) loadPokemons(152, 251);
@@ -290,7 +304,9 @@ function changeGeneration(genNumber) {
     if (genNumber === 5) loadPokemons(494, 649);
 }
 
+
 const closeButton = document.getElementById("search-close-icon");
+
 
 closeButton.addEventListener("click", () => {
     searchInput.value = "";
@@ -299,8 +315,10 @@ closeButton.addEventListener("click", () => {
     notFoundMessage.classList.add("hidden");
 });
 
+
 loadMoreBtn.addEventListener("click", loadMorePokemons);
 searchInput.addEventListener("input", handleSearch);
+
 
 const colours = {
     normal: '#A8A77A', fire: '#EE8130', water: '#6390F0', electric: '#F7D02C',
@@ -309,6 +327,7 @@ const colours = {
     rock: '#B6A136', ghost: '#735797', dragon: '#6F35FC', dark: '#705746',
     steel: '#B7B7CE', fairy: '#D685AD',
 };
+
 
 showLoader();
 loadPokemons(1, 151);
