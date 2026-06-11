@@ -61,7 +61,7 @@ body {
     align-items: center;
     gap: 16px;
     width: 100%;
-    flex-wrap: wrap;
+  
 }
 
 .search-wrap {
@@ -136,6 +136,13 @@ body {
     gap: 8px;
     z-index: 99;
     min-width: 140px;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+
+.filter-wrapper.hidden {
+    display: none !important;
+    opacity: 0;
 }
 
 .filter-wrapper p {
@@ -507,7 +514,7 @@ dialog::backdrop {
 
 .bg-type-icon {
     position: absolute;
-    bottom: -10px;
+    bottom: 320px;
     width: 130px;
     height: 130px;
     opacity: 0.45; 
@@ -527,7 +534,7 @@ dialog::backdrop {
 
 .icon-single {
     right: -10px;
-    bottom: -10px;
+    bottom: 320px;
     width: 150px;
     height: 150px;
     transform: rotate(10deg);
