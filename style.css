@@ -685,6 +685,48 @@ dialog::backdrop {
     z-index: 100;
 }
 
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color-pokeball-red);
+    height: 128px;
+    width: 100%;
+    clip-path: ellipse(90% 100% at 50% 100%);
+}
+
+.footer_section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.img_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+.img_section > img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    padding-top: 16px;
+}
+
+.img_section > p {
+    font-family: 'Figtree';
+    color: var(--bg-color-game-yellow);
+    line-height: 100%;
+    letter-spacing: 0%;
+    size: 24px;
+    padding-bottom: 16px;
+}
+
 
 @media (max-width: 768px) {
     .logo-wrapper h1 {
@@ -693,6 +735,11 @@ dialog::backdrop {
     
     .list-wrapper {
         padding: 0 16px;
+    }
+
+    .footer {
+        clip-path: ellipse(120% 100% at 50% 100%);
+        margin-top: auto;   
     }
 }
 
@@ -752,5 +799,10 @@ dialog::backdrop {
     .evo-item img {
         width: 60px;
         height: 60px;
+    }
+
+    .footer {
+        clip-path: ellipse(120% 100% at 50% 100%);
+        margin-top: auto;   
     }
 }
