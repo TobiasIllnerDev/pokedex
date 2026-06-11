@@ -823,6 +823,10 @@ dialog::backdrop {
         height: 250px; 
         padding: 16px;
     }
+    
+    .dialog-img-wrap  > img {
+        height: 200px;
+    }
 
     .tab-btn {
         padding: 8px 10px; 
