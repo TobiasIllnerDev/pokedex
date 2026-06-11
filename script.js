@@ -133,6 +133,7 @@ function handleSearch() {
 
     const filtered = getFilteredPokemons(searchTerm);
     if (filtered === null) {
+        resetSearchUI();
         notFoundText.classList.remove("hidden");
         return;
     }
