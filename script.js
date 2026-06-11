@@ -18,6 +18,14 @@ let currentOpenedPokemon = null;
 let currentStartId = 1;
 let currentEndId = 151;
 
+function showLoader() {
+    document.getElementById("loading").classList.remove("hidden");
+}
+
+function hideLoader() {
+    document.getElementById("loading").classList.add("hidden");
+}
+
 async function loadPokemons(startId = 1, endId = 151) {
     currentStartId = startId;
     currentEndId = endId;
@@ -38,9 +46,12 @@ async function loadPokemons(startId = 1, endId = 151) {
     } catch (error) {
         console.error("Fehler beim Laden der Pokémon:", error);
     }
+    finally {
+        hideLoader();
+    }
 }
 
-function displayPokemons(pokemons) {
+async function displayPokemons(pokemons, append = false) {
     let htmlContent = ""; 
 
     pokemons.forEach(pokemon => {
@@ -48,16 +59,23 @@ function displayPokemons(pokemons) {
         htmlContent += showPokemonTemplate(pokemon, pokemonID);
     });
 
-    listWrapper.innerHTML = htmlContent;
+    if (append) {
+        listWrapper.innerHTML += htmlContent;
+    } else {
+        listWrapper.innerHTML = htmlContent;
+    }
 
     const renderedItems = listWrapper.getElementsByClassName("list-item");
 
-    pokemons.forEach((pokemon, i) => {
-        const pokemonID = pokemon.url.split("/")[6];
-        loadPokemonsDetails(pokemonID, renderedItems[i]);
-    });
-}
+    const startIndex = append ? renderedItems.length - pokemons.length : 0;
 
+    const detailPromises = pokemons.map((pokemon, i) => {
+        const pokemonID = pokemon.url.split("/")[6];
+        return loadPokemonsDetails(pokemonID, renderedItems[startIndex + i]);
+    });
+
+    return Promise.all(detailPromises);
+}
 async function loadPokemonsDetails(id, cardElement) {
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -125,6 +143,7 @@ function handleSearch() {
 }
 
 async function handlePokemonClick(pokemonID) {
+    showLoader();
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonID}`);
         const pokemonData = await response.json();
@@ -161,6 +180,8 @@ async function handlePokemonClick(pokemonID) {
         detailDialog.showModal();
     } catch (error) {
         console.error("Fehler beim Laden des Dialogs:", error);
+    } finally {
+        hideLoader();
     }
 }
 
@@ -196,7 +217,7 @@ function renderStatsTab() {
 
 async function renderEvoTab() {
     const container = document.getElementById("tab-content-container");
-    container.innerHTML = "<p>Loading evolutions...</p>";
+    container.innerHTML = "<p class='evo-loading'>Loading evolutions...</p>";
 
     try {
         const speciesResp = await fetch(currentOpenedPokemon.species.url);
@@ -242,16 +263,23 @@ detailDialog.addEventListener("click", (e) => {
     if (e.target === detailDialog) detailDialog.close();
 });
 
-function loadMorePokemons() {
-    currentDisplayedCount += 20;
+async function loadMorePokemons() {
+    showLoader(); 
+    try {
+        const oldDisplayCount = currentDisplayedCount;
+        currentDisplayedCount += 20;
 
-    if (currentDisplayedCount >= allPokemons.length) {
-        currentDisplayedCount = allPokemons.length;
-        loadMoreBtn.classList.add("hidden");
+        if (currentDisplayedCount >= allPokemons.length) {
+            currentDisplayedCount = allPokemons.length;
+            loadMoreBtn.classList.add("hidden");
+        }
+        const newPokemonsToDisplay = allPokemons.slice(oldDisplayCount, currentDisplayedCount);
+        await displayPokemons(newPokemonsToDisplay, true); 
+    } catch (error) {
+        console.error("Fehler beim Erweitern der Liste:", error);
+    } finally {
+        hideLoader(); 
     }
-
-    const pokemonsToDisplay = allPokemons.slice(0, currentDisplayedCount);
-    displayPokemons(pokemonsToDisplay);
 }
 
 function changeGeneration(genNumber) {
@@ -282,4 +310,5 @@ const colours = {
     steel: '#B7B7CE', fairy: '#D685AD',
 };
 
+showLoader();
 loadPokemons(1, 151);
