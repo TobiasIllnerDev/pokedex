@@ -61,6 +61,7 @@ body {
     align-items: center;
     gap: 16px;
     width: 100%;
+    flex-wrap: wrap;
 }
 
 .search-wrap {
@@ -172,17 +173,18 @@ body {
     background-color: var(--bg-color-pokeball-white);
     border-radius: 32px;
     padding: 32px 0;
-    margin: 30px;
+    margin: 30px 16px;
     flex-grow: 1;
 }
 
 .list-wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-auto-rows: minmax(350px, auto); 
     gap: 16px;
     justify-content: center;
 }
+
 .list-item {
     background-color: var(--bg-color-pokeball-white);
     border: 1px solid var(--bg-color-pokeball-grey);
@@ -309,7 +311,9 @@ body {
     align-items: center;
     justify-content: center;
     margin-top: 30px;
-    gap: 20px;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 0 16px;
 }
 
 .btn-genarations > button {
@@ -503,9 +507,9 @@ dialog::backdrop {
 
 .bg-type-icon {
     position: absolute;
-    bottom: 320px;
-    width: 140px;
-    height: 140px;
+    bottom: -10px;
+    width: 130px;
+    height: 130px;
     opacity: 0.45; 
     pointer-events: none; 
     z-index: -1; 
@@ -522,10 +526,10 @@ dialog::backdrop {
 }
 
 .icon-single {
-    right: -20px;
-    bottom: 320px;
-    width: 180px;
-    height: 180px;
+    right: -10px;
+    bottom: -10px;
+    width: 150px;
+    height: 150px;
     transform: rotate(10deg);
 }
 
@@ -589,85 +593,157 @@ dialog::backdrop {
 }
 
 .loader {
-  position: absolute;
-  top: calc(50% - 32px);
-  left: calc(50% - 32px);
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  perspective: 800px;
+    position: absolute;
+    top: calc(50% - 32px);
+    left: calc(50% - 32px);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    perspective: 800px;
 }
 
 .inner {
-  position: absolute;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;  
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;  
 }
 
 .inner.one {
-  left: 0%;
-  top: 0%;
-  animation: rotate-one 1s linear infinite;
-  border-bottom: 3px solid #EFEFFA;
+    left: 0%;
+    top: 0%;
+    animation: rotate-one 1s linear infinite;
+    border-bottom: 3px solid #EFEFFA;
 }
 
 .inner.two {
-  right: 0%;
-  top: 0%;
-  animation: rotate-two 1s linear infinite;
-  border-right: 3px solid #EFEFFA;
+    right: 0%;
+    top: 0%;
+    animation: rotate-two 1s linear infinite;
+    border-right: 3px solid #EFEFFA;
 }
 
 .inner.three {
-  right: 0%;
-  bottom: 0%;
-  animation: rotate-three 1s linear infinite;
-  border-top: 3px solid #EFEFFA;
+    right: 0%;
+    bottom: 0%;
+    animation: rotate-three 1s linear infinite;
+    border-top: 3px solid #EFEFFA;
 }
 
 @keyframes rotate-one {
-  0% {
-    transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
-  }
-  100% {
-    transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
-  }
+    0% {
+        transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+    }
+    100% {
+        transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+    }
 }
 
 @keyframes rotate-two {
-  0% {
-    transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
-  }
-  100% {
-    transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
-  }
+    0% {
+        transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+    }
+    100% {
+        transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+    }
 }
 
 @keyframes rotate-three {
-  0% {
-    transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
-  }
-  100% {
-    transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
-  }
+    0% {
+        transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+    }
+    100% {
+        transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+    }
 }
 #loading {
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  position: fixed;
-  display: block;
-  opacity: 0.7;
-  background-color : #0e086b;
-  z-index: 99;
-  text-align: center;
-  }
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: block;
+    opacity: 0.7;
+    background-color : #0e086b;
+    z-index: 99;
+    text-align: center;
+}
+
 #loading-image {
-  position: absolute;
-  top: 100px;
-  left: 240px;
-  z-index: 100;
-  }
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
+
+
+@media (max-width: 768px) {
+    .logo-wrapper h1 {
+        font-size: 2.5rem; 
+    }
+    
+    .list-wrapper {
+        padding: 0 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-wrapper {
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    .logo-wrapper img {
+        width: 36px;
+        height: 36px;
+    }
+
+    .logo-wrapper h1 {
+        font-size: 2rem;
+        transform: translateY(-4px);
+    }
+
+    .search-wrapper {
+        gap: 12px;
+    }
+    
+    .search-input {
+        padding: 12px 40px;
+        font-size: 0.95rem;
+    }
+
+    .pokemon-list {
+        margin: 16px 8px; 
+        padding: 20px 0;
+    }
+
+    dialog {
+        width: 95%; 
+        border-radius: 20px;
+    }
+
+    .dialog-card-wrapper {
+        padding: 20px 16px; 
+    }
+
+    .dialog-body-fixed {
+        height: 250px; 
+        padding: 16px;
+    }
+
+    .tab-btn {
+        padding: 8px 10px; 
+        font-size: 0.9rem;
+    }
+    
+    .evo-container {
+        gap: 10px;
+    }
+
+    .evo-item img {
+        width: 60px;
+        height: 60px;
+    }
+}
