@@ -26,6 +26,8 @@ function showPokemonTypes(typeName) {
 function showPokemonDetailDialogTemplate(pokemon, typesHTML, backgroundStyle, bgImagesHTML) {
     return `
         <div class="dialog-card-wrapper" style="${backgroundStyle}">
+            <button id="dialog-prev-btn" class="nav-arrow-btn">&#10094;</button>
+            <button id="dialog-next-btn" class="nav-arrow-btn">&#10095;</button>
             
             ${bgImagesHTML}
 
@@ -51,7 +53,6 @@ function showPokemonDetailDialogTemplate(pokemon, typesHTML, backgroundStyle, bg
         </div>
     `;
 }
-
 function showDialogInfoTemplate(heightInMeters, weightInKilos, baseExperience, abilitiesHTML) {
     return `
         <div class="tab-content">

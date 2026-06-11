@@ -727,6 +727,37 @@ dialog::backdrop {
     padding-bottom: 16px;
 }
 
+.nav-arrow-btn {
+    position: absolute;
+    top: 25%; 
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, transform 0.2s;
+    z-index: 15; 
+}
+
+.nav-arrow-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+}
+
+#dialog-prev-btn {
+    left: 12px;
+}
+
+#dialog-next-btn {
+    right: 12px;
+}
+
 
 @media (max-width: 768px) {
     .logo-wrapper h1 {

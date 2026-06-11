@@ -291,6 +291,32 @@ function changeGeneration(genNumber) {
     if (genNumber === 5) loadPokemons(494, 649);
 }
 
+function getNeighbourId(direction) {
+    const currentId = currentOpenedPokemon.id;
+    if (direction === "next") {
+        return currentId >= currentEndId ? currentStartId : currentId + 1;
+    }
+    if (direction === "prev") {
+        return currentId <= currentStartId ? currentEndId : currentId - 1;
+    }
+    return currentId;
+}
+
+async function navigatePokemon(direction) {
+    const nextId = getNeighbourId(direction);
+    await handlePokemonClick(nextId);
+}
+
+function setupAndShowDialog(data, typesHTML, design) {
+    dialogContent.innerHTML = showPokemonDetailDialogTemplate(data, typesHTML, design.bgStyle, design.bgImages);
+    renderInfosTab();
+    
+    document.getElementById("dialog-prev-btn")?.addEventListener("click", () => navigatePokemon("prev"));
+    document.getElementById("dialog-next-btn")?.addEventListener("click", () => navigatePokemon("next"));
+    
+    detailDialog.showModal();
+}
+
 const closeButton = document.getElementById("search-close-icon");
 
 closeButton.addEventListener("click", () => {
