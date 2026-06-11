@@ -605,6 +605,19 @@ dialog::backdrop {
     text-transform: capitalize;
 }
 
+#not-found-message-text {
+    height: 30px; 
+    line-height: 30px;
+    margin: 0;
+    transition: opacity 0.2s ease;
+}
+
+#not-found-message-text.hidden {
+    display: block !important;
+    visibility: hidden;
+    opacity: 0;
+}
+
 .loader {
     position: absolute;
     top: calc(50% - 32px);

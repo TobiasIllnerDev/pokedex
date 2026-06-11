@@ -300,7 +300,12 @@ function changeGeneration(genNumber) {
 
 function getActivePokemonList() {
     const searchTerm = searchInput.value.trim().toLowerCase();
-    if (searchTerm !== "" && searchTerm.length >= 3) {
+    if (searchTerm === "") return allPokemons;
+
+    const isNumberSearch = numberFilter.checked && searchTerm.length >= 1;
+    const isNameSearch = nameFilter.checked && searchTerm.length >= 3;
+
+    if (isNumberSearch || isNameSearch) {
         return getFilteredPokemons(searchTerm) || [];
     }
     return allPokemons;
